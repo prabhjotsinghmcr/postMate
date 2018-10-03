@@ -3,12 +3,15 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -42,35 +45,66 @@
      <tabs>
        <Tab text="GET">
          <content>
-             <VBox fx:id="container" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-                 <children>
-                     <Label text="Response Body:" />
-                     <TextFlow fx:id="textFlowGetReq">
-                        <children>
-                           <StyleClassedTextArea fx:id="bodyTextBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="347.0" prefWidth="942.0" />
-                        </children></TextFlow>
-                     <Button fx:id="submitButtonGetReq" mnemonicParsing="false" onAction="#handleGetRequest" text="Submit" />
-                     <GridPane prefHeight="30.0" prefWidth="874.0">
-                       <columnConstraints>
-                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="464.0" minWidth="10.0" prefWidth="112.0" />
-                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="879.0" minWidth="10.0" prefWidth="830.0" />
-                       </columnConstraints>
-                       <rowConstraints>
-                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                       </rowConstraints>
-                        <children>
-                           <Label prefHeight="14.0" prefWidth="139.0" text="Response Status:" />
-                           <Label fx:id="responseStatusValueGet" text="" GridPane.columnIndex="1" />
-                        </children>
-                     </GridPane>
-                 </children>
+             <TabPane fx:id="getReqTabPane" tabClosingPolicy="UNAVAILABLE" GridPane.columnSpan="2147483647" GridPane.rowIndex="3">
+                 <tabs>
+                     <Tab fx:id="getReqHeadersTab" text="Headers">
+                         <content>
+                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                              <children>
+                                 <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <Button fx:id="submitButtonGetReqHead" mnemonicParsing="false" onAction="#popTalble" text="Add new header Row">
+                                          <VBox.margin>
+                                             <Insets />
+                                          </VBox.margin>
+                                       </Button>
+                                       <TableView fx:id="postHeaderTableView" prefHeight="464.0" prefWidth="755.0" />
+                                    </children>
+                                 </VBox>
+                              </children></AnchorPane>
+                         </content>
+                     </Tab>
+                     <Tab fx:id="getReqResponseTab" text="Response">
+                         <content>
+                             <VBox fx:id="container" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+                                 <children>
+                                     <Label text="Response Body:" />
+                                     <TextFlow fx:id="textFlowGetReq">
+                                         <children>
+                                             <StyleClassedTextArea fx:id="bodyTextBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="347.0" prefWidth="942.0" />
+                                         </children></TextFlow>
+                                     <Button fx:id="submitButtonGetReq" mnemonicParsing="false" onAction="#handleGetRequest" text="Submit" />
+                                     <GridPane prefHeight="30.0" prefWidth="874.0">
+                                         <columnConstraints>
+                                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="464.0" minWidth="10.0" prefWidth="112.0" />
+                                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="879.0" minWidth="10.0" prefWidth="830.0" />
+                                         </columnConstraints>
+                                         <rowConstraints>
+                                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                         </rowConstraints>
+                                         <children>
+                                             <Label prefHeight="14.0" prefWidth="139.0" text="Response Status:" />
+                                             <Label fx:id="responseStatusValueGet" text="" GridPane.columnIndex="1" />
+                                         </children>
+                                     </GridPane>
+                                 </children>
+                                 <padding>
+                                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                 </padding>
+
+                             </VBox>
+                         </content>
+                     </Tab>
+                 </tabs>
                  <padding>
-                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     <Insets bottom="20.0" />
                  </padding>
-                 
-             </VBox>
+             </TabPane>
          </content>
        </Tab>
+
+
+
        <Tab text="POST">
          <content>
              <TabPane fx:id="postReqTabPane" tabClosingPolicy="UNAVAILABLE" GridPane.columnSpan="2147483647" GridPane.rowIndex="3">
@@ -79,7 +113,21 @@
                          <content>
                              <VBox fx:id="containerPost" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
                                  <children>
-                                     <Label text="Request Body:" />
+                                 <HBox prefHeight="27.0" prefWidth="731.0">
+                                    <children>
+                                           <Label text="Request Body:">
+                                          <font>
+                                             <Font size="14.0" />
+                                          </font></Label>
+                                       <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                       <Button fx:id="jsonUploadButton" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#uploadJson" text="Upload JSON" />
+                                       <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                       <Label fx:id="jsonFileNameLabel" text=":">
+                                          <font>
+                                             <Font size="14.0" />
+                                          </font></Label>
+                                    </children>
+                                 </HBox>
                                      <TextFlow fx:id="textFlowPost">
                                          <children>
                                              <StyleClassedTextArea fx:id="postReqBodyText" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="347.0" prefWidth="942.0" />
@@ -126,6 +174,11 @@
              </TabPane>
          </content>
        </Tab>
+
+
+
+
+
          <Tab text="PUT">
            <content>
              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />

@@ -82,10 +82,11 @@ public class RestService {
         String response = null;
         try(CloseableHttpClient httpClient = HttpClientBuilder.create().build()) {
             HttpDelete httpDelete = new HttpDelete(url);
-            httpDelete.
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return response;
     }
 
 }
